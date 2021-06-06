@@ -1,5 +1,5 @@
 ﻿
-namespace DinoGame
+namespace Dino
 {
     partial class Form1
     {

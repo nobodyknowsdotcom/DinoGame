@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DinoGame.Classes
+namespace Dino.Classes
 {
     public class Road
     {
@@ -18,11 +18,7 @@ namespace DinoGame.Classes
 
         public void DrawSprite(Graphics g)
         {
-            g.DrawImage(GameController.spriteSheet, 
-                new Rectangle(
-                    new Point((int)transform.position.X, (int)transform.position.Y),
-                    new Size(transform.size.Width, transform.size.Height)),
-                2300, 112, 100, 17, GraphicsUnit.Pixel);
+            g.DrawImage(GameController.spritesheet, new Rectangle(new Point((int)transform.position.X, (int)transform.position.Y), new Size(transform.size.Width, transform.size.Height)), 2300, 112, 100, 17, GraphicsUnit.Pixel);
         }
     }
 }

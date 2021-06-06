@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Cactus.cs" />
     <Compile Include="Classes\Bird.cs" />
+    <Compile Include="Classes\Cactus.cs" />
     <Compile Include="Classes\GameController.cs" />
+    <Compile Include="Classes\Physics.cs" />
+    <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Road.cs" />
     <Compile Include="Classes\Transform.cs" />
     <Compile Include="Form1.cs">
@@ -88,5 +90,6 @@
   <ItemGroup>
     <Content Include="Sprites\sprite.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
