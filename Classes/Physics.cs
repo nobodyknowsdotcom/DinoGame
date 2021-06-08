@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Dino.Classes;
 
-namespace Dino.Classes
+namespace DinoGame.Classes
 {
     public class Physics
     {
@@ -25,21 +22,7 @@ namespace Dino.Classes
             isCrouching = false;
         }
 
-        public void ApplyPhysics()
-        {
-            CalculatePhysics();
-        }
-
-        public void CalculatePhysics()
-        {
-            if(transform.position.Y<150 || isJumping)
-            {
-                transform.position.Y += gravity;
-                gravity += a;
-            }
-            if (transform.position.Y > 150)
-                isJumping = false;
-        }
+        
 
         public bool Collide()
         {
@@ -73,7 +56,7 @@ namespace Dino.Classes
             }
             return false;
         }
-
+        
         public void AddForce()
         {
             if (!isJumping)
@@ -82,5 +65,20 @@ namespace Dino.Classes
                 gravity = -11;
             }
         }
-    }
+        
+        public void ApplyPhysics()
+        {
+            CalculatePhysics();
+        }
+        
+        private void CalculatePhysics()
+        {
+            if(transform.position.Y<150 || isJumping)
+            {
+                transform.position.Y += gravity;
+                gravity += a;
+            }
+            if (transform.position.Y > 150)
+                isJumping = false;
+        }    }
 }

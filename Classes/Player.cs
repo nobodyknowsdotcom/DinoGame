@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using Dino.Classes;
 
-namespace Dino.Classes
+namespace DinoGame.Classes
 {
     public class Player
     {
@@ -33,7 +29,7 @@ namespace Dino.Classes
             }
         }
 
-        public void DrawNeededSprite(Graphics g, int srcX, int srcY, int width, int height, int delta, float multiplier)
+        private void DrawNeededSprite(Graphics g, int srcX, int srcY, int width, int height, int delta, float multiplier)
         {
             framesCount++;
             if (framesCount <= 10)
@@ -43,7 +39,27 @@ namespace Dino.Classes
             else if (framesCount > 20)
                 framesCount = 0;
 
-            g.DrawImage(GameController.spritesheet, new Rectangle(new Point((int)physics.transform.position.X, (int)physics.transform.position.Y), new Size((int)(physics.transform.size.Width * multiplier), physics.transform.size.Height)), srcX + delta * animationCount, srcY, width, height, GraphicsUnit.Pixel);
+            g.DrawImage(GameController.spritesheet, new Rectangle(
+                new Point((int)physics.transform.position.X, (int)physics.transform.position.Y),
+                new Size((int)(physics.transform.size.Width * multiplier), physics.transform.size.Height)),
+                srcX + delta * animationCount, srcY, width, height, GraphicsUnit.Pixel);
+        }
+    }
+
+    public static class PlayerExtensions
+    {
+        public static void Jump(this Player player)
+        {
+            if (player.physics.isCrouching) return;
+            player.physics.isCrouching = false;
+            player.physics.AddForce();
+        }
+        
+        public static void Crouch(this Player player)
+        {
+            player.physics.isCrouching = false;
+            player.physics.transform.size.Height = 50;
+            player.physics.transform.position.Y = 150.2f;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
-namespace Dino
+namespace DinoGame
 {
-    partial class Form1
+    sealed partial class Form1
     {
         /// <summary>
         /// Обязательная переменная конструктора.

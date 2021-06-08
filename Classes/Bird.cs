@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using Dino.Classes;
 
-namespace Dino.Classes
+namespace DinoGame.Classes
 {
     public class Bird
     {
@@ -28,7 +24,10 @@ namespace Dino.Classes
             else if (frameCount > 20)
                 frameCount = 0;
 
-            g.DrawImage(GameController.spritesheet, new Rectangle(new Point((int)transform.position.X, (int)transform.position.Y), new Size(transform.size.Width, transform.size.Height)), 264+92*animationCount, 6, 83, 71, GraphicsUnit.Pixel);
+            g.DrawImage(GameController.spritesheet, new Rectangle(
+                new Point((int)transform.position.X, (int)transform.position.Y), 
+                new Size(transform.size.Width, transform.size.Height)), 
+                264+92*animationCount, 6, 83, 71, GraphicsUnit.Pixel);
         }
     }
 }

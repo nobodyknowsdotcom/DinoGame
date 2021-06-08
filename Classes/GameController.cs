@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Dino.Classes;
 
-namespace Dino.Classes
+namespace DinoGame.Classes
 {
     public static class GameController
     {
@@ -17,7 +15,8 @@ namespace Dino.Classes
         public static int dangerSpawn = 10;
         public static int countDangerSpawn = 0;
 
-
+        // Инициализация массивов roads, birds, cactuses и spritesheet
+        // 
         public static void Init()
         {
             roads = new List<Road>();
