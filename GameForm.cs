@@ -9,7 +9,8 @@ namespace DinoGame
     {
         Player player;
         Timer mainTimer;
-        private int speed = 8;
+        private int speed = 0;
+        private int speedConst = 4;
         public GameForm()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace DinoGame
         private void Update(object sender, EventArgs e)
         {
             player.score++;
+            speed = speedConst + (player.score / 1000);
             this.Text = "Dino - Score: " + player.score;
             if (player.physics.Collide())
                 Init();
@@ -41,7 +43,7 @@ namespace DinoGame
         {
             switch (e.KeyCode)
             {
-                case Keys.Down:
+                case Keys.S:
                     if (!player.physics.isJumping)
                     {
                         player.physics.isCrouching = true;
@@ -57,16 +59,12 @@ namespace DinoGame
         {
             switch (e.KeyCode)
             {
-                case Keys.Up:
-                    player.Jump();
-                    break;
-
-                case Keys.Down:
-                    player.Crouch();
-                    break;
-
                 case Keys.W:
                     player.Jump();
+                    break;
+
+                case Keys.S:
+                    player.Crouch();
                     break;
             }
         }
