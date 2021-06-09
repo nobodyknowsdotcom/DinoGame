@@ -17,6 +17,8 @@ namespace DinoGame
 
             this.Width = 700;
             this.Height = 300;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.Text = "Dino Runner";
             this.DoubleBuffered = true;
             this.Paint += new PaintEventHandler(DrawGame);
             this.KeyUp += new KeyEventHandler(OnKeyboardUp);
@@ -30,8 +32,8 @@ namespace DinoGame
         private void Update(object sender, EventArgs e)
         {
             player.score++;
+            this.label1.Text = "meters ahead: " + player.score;
             speed = speedConst + (player.score / 1000);
-            this.Text = "Dino - Score: " + player.score;
             if (player.physics.Collide())
                 Init();
             player.physics.ApplyPhysics();
@@ -62,6 +64,10 @@ namespace DinoGame
                 case Keys.W:
                     player.Jump();
                     break;
+                
+                case Keys.Space:
+                    player.Jump();
+                    break;
 
                 case Keys.S:
                     player.Crouch();
@@ -87,6 +93,10 @@ namespace DinoGame
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
         }
     }
 }
