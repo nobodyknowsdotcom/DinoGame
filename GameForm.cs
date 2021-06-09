@@ -5,11 +5,12 @@ using DinoGame.Classes;
 
 namespace DinoGame
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
         Player player;
         Timer mainTimer;
-        public Form1()
+        private int speed = 8;
+        public GameForm()
         {
             InitializeComponent();
 
@@ -25,14 +26,14 @@ namespace DinoGame
             Init();
         }
 
-        public void Update(object sender, EventArgs e)
+        private void Update(object sender, EventArgs e)
         {
             player.score++;
             this.Text = "Dino - Score: " + player.score;
             if (player.physics.Collide())
                 Init();
             player.physics.ApplyPhysics();
-            GameController.MoveMap();
+            GameController.MoveMap(speed);
             Invalidate();
         }
         
@@ -70,7 +71,7 @@ namespace DinoGame
             }
         }
 
-        public void Init()
+        private void Init()
         {
             GameController.Init();
             player = new Player(new PointF(50, 149), new Size(50, 50));

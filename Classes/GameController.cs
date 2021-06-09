@@ -26,11 +26,11 @@ namespace DinoGame.Classes
             GenerateRoad();
         }
 
-        public static void MoveMap()
+        public static void MoveMap(int speed)
         {
             for(int i = 0; i < roads.Count; i++)
             {
-                roads[i].transform.position.X -= 4;
+                roads[i].transform.position.X -= speed;
                 if (roads[i].transform.position.X + roads[i].transform.size.Width < 0)
                 {
                     roads.RemoveAt(i);
@@ -39,7 +39,7 @@ namespace DinoGame.Classes
             }
             for (int i = 0; i < cactuses.Count; i++)
             {
-                cactuses[i].transform.position.X -= 4;
+                cactuses[i].transform.position.X -= speed;
                 if (cactuses[i].transform.position.X + cactuses[i].transform.size.Width < 0)
                 {
                     cactuses.RemoveAt(i);
@@ -47,7 +47,7 @@ namespace DinoGame.Classes
             }
             for (int i = 0; i < birds.Count; i++)
             {
-                birds[i].transform.position.X -= 4;
+                birds[i].transform.position.X -= speed;
                 if (birds[i].transform.position.X + birds[i].transform.size.Width < 0)
                 {
                     birds.RemoveAt(i);

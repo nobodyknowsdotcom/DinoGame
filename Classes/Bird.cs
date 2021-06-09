@@ -17,11 +17,11 @@ namespace DinoGame.Classes
         public void DrawSprite(Graphics g)
         {
             frameCount++;
-            if (frameCount <= 10)
+            if (frameCount <= 7)
                 animationCount = 0;
-            else if (frameCount > 10 && frameCount <= 20)
+            else if (frameCount > 7 && frameCount <= 14)
                 animationCount = 1;
-            else if (frameCount > 20)
+            else if (frameCount > 14)
                 frameCount = 0;
 
             g.DrawImage(GameController.spritesheet, new Rectangle(

@@ -26,9 +26,8 @@ namespace DinoGame.Classes
 
         public bool Collide()
         {
-            for(int i = 0; i < GameController.cactuses.Count; i++)
+            foreach (var cactus in GameController.cactuses)
             {
-                var cactus = GameController.cactuses[i];
                 PointF delta = new PointF();
                 delta.X = (transform.position.X + transform.size.Width / 2) - (cactus.transform.position.X + cactus.transform.size.Width / 2);
                 delta.Y = (transform.position.Y + transform.size.Height / 2) - (cactus.transform.position.Y + cactus.transform.size.Height / 2);
@@ -40,9 +39,8 @@ namespace DinoGame.Classes
                     }
                 }
             }
-            for (int i = 0; i < GameController.birds.Count; i++)
+            foreach (var bird in GameController.birds)
             {
-                var bird = GameController.birds[i];
                 PointF delta = new PointF();
                 delta.X = (transform.position.X + transform.size.Width / 2) - (bird.transform.position.X + bird.transform.size.Width / 2);
                 delta.Y = (transform.position.Y + transform.size.Height / 2) - (bird.transform.position.Y + bird.transform.size.Height / 2);

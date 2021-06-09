@@ -13,6 +13,7 @@ namespace DinoGame.Classes
         }
 
         public void DrawSprite(Graphics g)
+        
         {
             g.DrawImage(GameController.spritesheet, new Rectangle(
                 new Point((int)transform.position.X, (int)transform.position.Y), 
