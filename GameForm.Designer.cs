@@ -30,6 +30,7 @@ namespace DinoGame
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -46,17 +47,33 @@ namespace DinoGame
             this.label1.UseMnemonic = false;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label2.Location = new System.Drawing.Point(666, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(134, 61);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "label2";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "GameForm";
             this.Text = "GameForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label label2;
 
         private System.Windows.Forms.Label label1;
 

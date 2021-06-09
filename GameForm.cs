@@ -9,8 +9,9 @@ namespace DinoGame
     {
         Player player;
         Timer mainTimer;
-        private int speed = 0;
-        private int speedConst = 4;
+        private int currentSpeed = 1;
+        private int increasedSpeed = 0;
+        private int speedConst = 3;
         public GameForm()
         {
             InitializeComponent();
@@ -18,6 +19,7 @@ namespace DinoGame
             this.Width = 700;
             this.Height = 300;
             this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.Text = "Dino Runner";
             this.DoubleBuffered = true;
             this.Paint += new PaintEventHandler(DrawGame);
@@ -33,11 +35,13 @@ namespace DinoGame
         {
             player.score++;
             this.label1.Text = "meters ahead: " + player.score;
-            speed = speedConst + (player.score / 1000);
+            this.label2.Text = "dino speed: " + increasedSpeed;
+            increasedSpeed = 1 + (player.score / 800);
+            currentSpeed = speedConst + increasedSpeed;
             if (player.physics.Collide())
                 Init();
             player.physics.ApplyPhysics();
-            GameController.MoveMap(speed);
+            GameController.MoveMap(currentSpeed);
             Invalidate();
         }
         

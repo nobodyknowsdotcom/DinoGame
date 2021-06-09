@@ -16,7 +16,7 @@ namespace DinoGame.Classes
         public static int countDangerSpawn = 0;
 
         // Инициализация массивов roads, birds, cactuses и spritesheet
-        // 
+        // Отрисовка и генерация дороги в игре через GenegateRoad
         public static void Init()
         {
             roads = new List<Road>();
