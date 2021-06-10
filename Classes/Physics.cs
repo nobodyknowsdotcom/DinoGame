@@ -60,7 +60,7 @@ namespace DinoGame.Classes
             if (!isJumping)
             {
                 isJumping = true;
-                gravity = -11;
+                gravity = -10;
             }
         }
         

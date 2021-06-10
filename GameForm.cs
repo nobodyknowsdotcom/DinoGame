@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DinoGame.Classes;
+using System.Threading;
+using Timer = System.Windows.Forms.Timer;
 
 namespace DinoGame
 {
@@ -34,7 +36,7 @@ namespace DinoGame
         private void Update(object sender, EventArgs e)
         {
             player.score++;
-            this.label1.Text = "meters ahead: " + player.score;
+            this.label1.Text = "meters ahead: " + player.score/10;
             this.label2.Text = "dino speed: " + increasedSpeed;
             increasedSpeed = 1 + (player.score / 500 );
             currentSpeed = speedConst + increasedSpeed;

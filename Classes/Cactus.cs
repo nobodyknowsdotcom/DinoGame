@@ -45,7 +45,7 @@ namespace DinoGame.Classes
             g.DrawImage(GameController.spritesheet, new Rectangle(
                 new Point((int)transform.position.X, (int)transform.position.Y), 
                 new Size(transform.size.Width, transform.size.Height)),
-                _sourceX, 0, 48, 100, GraphicsUnit.Pixel);
+                _sourceX, 0, 48, 96, GraphicsUnit.Pixel);
         }
     }
 }

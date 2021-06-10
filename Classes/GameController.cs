@@ -70,11 +70,11 @@ namespace DinoGame.Classes
                 switch (obj)
                 {
                     case 0:
-                        Cactus cactus = new Cactus(new PointF(0 + 100 * 9, 150), new Size(50, 50));
+                        Cactus cactus = new Cactus(new PointF(0 + 100 * 9, 130), new Size(40, 70));
                         cactuses.Add(cactus);
                         break;
                     case 1:
-                        Bird bird = new Bird(new PointF(0 + 100 * 9, 110), new Size(50, 50));
+                        Bird bird = new Bird(new PointF(0 + 100 * 9, 120), new Size(50, 50));
                         birds.Add(bird);
                         break;
                 }
