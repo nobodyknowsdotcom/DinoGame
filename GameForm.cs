@@ -20,6 +20,7 @@ namespace DinoGame
 
             this.Width = 700;
             this.Height = 300;
+            this.Icon = Icon.ExtractAssociatedIcon("C:\\Users\\urmomlover\\RiderProjects\\DinoGame\\Sprites\\Icon.ico");
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.Text = "Dino Runner";
