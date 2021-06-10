@@ -36,7 +36,7 @@ namespace DinoGame
             player.score++;
             this.label1.Text = "meters ahead: " + player.score;
             this.label2.Text = "dino speed: " + increasedSpeed;
-            increasedSpeed = 1 + (player.score / 800);
+            increasedSpeed = 1 + (player.score / 500 );
             currentSpeed = speedConst + increasedSpeed;
             if (player.physics.Collide())
                 Init();
@@ -82,7 +82,7 @@ namespace DinoGame
         private void Init()
         {
             GameController.Init();
-            player = new Player(new PointF(50, 149), new Size(50, 50));
+            player = new Player(new PointF(50, 150), new Size(50, 50));
             mainTimer.Start();
             Invalidate();
         }

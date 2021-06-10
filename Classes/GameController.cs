@@ -55,7 +55,7 @@ namespace DinoGame.Classes
             }
         }
 
-        public static void GetNewRoad()
+        private static void GetNewRoad()
         {
             Road road = new Road(new PointF(0 + 100 * 9, 200), new Size(100, 17));
             roads.Add(road);
@@ -81,7 +81,7 @@ namespace DinoGame.Classes
             }
         }
 
-        public static void GenerateRoad()
+        private static void GenerateRoad()
         {
             for(int i = 0; i < 10; i++)
             {
