@@ -9,13 +9,13 @@ namespace Dino.Classes
 {
     public class Transform
     {
-        public PointF position;
-        public Size size;
+        public PointF Position;
+        public Size Size;
 
         public Transform(PointF pos,Size size)
         {
-            this.position = pos;
-            this.size = size;
+            this.Position = pos;
+            this.Size = size;
         }
     }
 }

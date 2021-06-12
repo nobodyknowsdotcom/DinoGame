@@ -6,47 +6,47 @@ namespace DinoGame.Classes
 {
     public class Physics
     {
-        public Transform transform;
-        float gravity;
-        float a;
+        public Transform Transform;
+        float _gravity;
+        float _a;
 
-        public bool isJumping;
-        public bool isCrouching;
+        public bool IsJumping;
+        public bool IsCrouching;
 
         public Physics(PointF position, Size size)
         {
-            transform = new Transform(position, size);
-            gravity = 0;
-            a = 0.4f;
-            isJumping = false;
-            isCrouching = false;
+            Transform = new Transform(position, size);
+            _gravity = 0;
+            _a = 0.4f;
+            IsJumping = false;
+            IsCrouching = false;
         }
 
         
 
         public bool Collide()
         {
-            foreach (var cactus in GameController.cactuses)
+            foreach (var cactus in GameController.Cactuses)
             {
                 PointF delta = new PointF();
-                delta.X = (transform.position.X + transform.size.Width / 2) - (cactus.transform.position.X + cactus.transform.size.Width / 2);
-                delta.Y = (transform.position.Y + transform.size.Height / 2) - (cactus.transform.position.Y + cactus.transform.size.Height / 2);
-                if (Math.Abs(delta.X) <= transform.size.Width / 2 + cactus.transform.size.Width / 2)
+                delta.X = (Transform.Position.X + Transform.Size.Width / 2) - (cactus.Transform.Position.X + cactus.Transform.Size.Width / 2);
+                delta.Y = (Transform.Position.Y + Transform.Size.Height / 2) - (cactus.Transform.Position.Y + cactus.Transform.Size.Height / 2);
+                if (Math.Abs(delta.X) <= Transform.Size.Width / 2 + cactus.Transform.Size.Width / 2)
                 {
-                    if (Math.Abs(delta.Y) <= transform.size.Height / 2 + cactus.transform.size.Height / 2)
+                    if (Math.Abs(delta.Y) <= Transform.Size.Height / 2 + cactus.Transform.Size.Height / 2)
                     {
                         return true;
                     }
                 }
             }
-            foreach (var bird in GameController.birds)
+            foreach (var bird in GameController.Birds)
             {
                 PointF delta = new PointF();
-                delta.X = (transform.position.X + transform.size.Width / 2) - (bird.transform.position.X + bird.transform.size.Width / 2);
-                delta.Y = (transform.position.Y + transform.size.Height / 2) - (bird.transform.position.Y + bird.transform.size.Height / 2);
-                if (Math.Abs(delta.X) <= transform.size.Width / 2 + bird.transform.size.Width / 2)
+                delta.X = (Transform.Position.X + Transform.Size.Width / 2) - (bird.Transform.Position.X + bird.Transform.Size.Width / 2);
+                delta.Y = (Transform.Position.Y + Transform.Size.Height / 2) - (bird.Transform.Position.Y + bird.Transform.Size.Height / 2);
+                if (Math.Abs(delta.X) <= Transform.Size.Width / 2 + bird.Transform.Size.Width / 2)
                 {
-                    if (Math.Abs(delta.Y) <= transform.size.Height / 2 + bird.transform.size.Height / 2)
+                    if (Math.Abs(delta.Y) <= Transform.Size.Height / 2 + bird.Transform.Size.Height / 2)
                     {
                         return true;
                     }
@@ -57,10 +57,10 @@ namespace DinoGame.Classes
         
         public void AddForce()
         {
-            if (!isJumping)
+            if (!IsJumping)
             {
-                isJumping = true;
-                gravity = -10;
+                IsJumping = true;
+                _gravity = -10;
             }
         }
         
@@ -71,12 +71,12 @@ namespace DinoGame.Classes
         
         private void CalculatePhysics()
         {
-            if(transform.position.Y<150 || isJumping)
+            if(Transform.Position.Y<150 || IsJumping)
             {
-                transform.position.Y += gravity;
-                gravity += a;
+                Transform.Position.Y += _gravity;
+                _gravity += _a;
             }
-            if (transform.position.Y > 150)
-                isJumping = false;
+            if (Transform.Position.Y > 150)
+                IsJumping = false;
         }    }
 }

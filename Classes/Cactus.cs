@@ -4,21 +4,28 @@ using Dino.Classes;
 
 namespace DinoGame.Classes
 {
+    /// <summary>
+    /// Класс Cactuses отвечает за кактусы.
+    /// А кроме шуток, он имеет конструктор
+    /// Для присвоения экземпляру класса размера и положения в окне WinForms;
+    /// Также его задача - рандомно выбирать один из четырех кактусов из Spritesheet'а
+    /// Рандомно выбранный спрайт кактуса будет отрисован при следующем вызове DrawSprite.
+    /// </summary>
     public class Cactus
     {
-        public readonly Transform transform;
-        // sourceX - это иксовая координата начала вырезаемого спрайта из спрайтшита
-        // используется в ChooseRandomPic для разнообразия видов кактусов в игре
+        public readonly Transform Transform;
         int _sourceX;
 
+        // Конструктор данного класса,
+        // Задающий кактусу положение в окне WinForms и размер.
         public Cactus(PointF pos,Size size)
         {
-            transform = new Transform(pos, size);
+            Transform = new Transform(pos, size);
             ChooseRandomPic();
         }
 
         // Метод рандомно выбирает, какой из спрайтов кактуса
-        // будет вырезан и передан в метод DrawSprite
+        // Будет вырезан и отрисован при следующем вызове DrawSprite.
         private void ChooseRandomPic()
         {
             var r = new Random();
@@ -40,11 +47,12 @@ namespace DinoGame.Classes
             }
         }
 
+        // Рисует на экране кактус с заданными size, position и sourceX.
         public void DrawSprite(Graphics g)
         {
-            g.DrawImage(GameController.spritesheet, new Rectangle(
-                new Point((int)transform.position.X, (int)transform.position.Y), 
-                new Size(transform.size.Width, transform.size.Height)),
+            g.DrawImage(GameController.Spritesheet, new Rectangle(
+                new Point((int)Transform.Position.X, (int)Transform.Position.Y), 
+                new Size(Transform.Size.Width, Transform.Size.Height)),
                 _sourceX, 0, 48, 96, GraphicsUnit.Pixel);
         }
     }

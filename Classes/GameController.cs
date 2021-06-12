@@ -5,105 +5,113 @@ using Dino.Classes;
 
 namespace DinoGame.Classes
 {
+    /// <summary>
+    /// GameController отвечает игровую логику
+    /// Он приводит игровые объекты в движение
+    /// Генерирует и отрисовывает препятствия и дорогу.
+    /// </summary>
     public static class GameController
     {
-        public static Image spritesheet;
-        public static List<Road> roads;
-        public static List<Cactus> cactuses;
-        public static List<Bird> birds;
+        public static Image Spritesheet;
+        public static List<Road> Roads;
+        public static List<Cactus> Cactuses;
+        public static List<Bird> Birds;
 
-        public static int dangerSpawn = 10;
-        public static int countDangerSpawn = 0;
+        public static int DangerSpawn = 5;
+        public static int CountDangerSpawn = 0;
 
-        // Инициализация массивов roads, birds, cactuses и spritesheet
-        // Отрисовка и генерация дороги в игре через GenegateRoad
+        // Init инициализирует roads, birds, cactuses и привязывает sprite.png к переменной spritesheet
+        // Отрисовка и генерация дороги в игре через GenegateRoad.
         public static void Init()
         {
-            roads = new List<Road>();
-            birds = new List<Bird>();
-            cactuses = new List<Cactus>();
-            spritesheet = DinoGame.Properties.Resources.sprite;
+            Roads = new List<Road>();
+            Birds = new List<Bird>();
+            Cactuses = new List<Cactus>();
+            Spritesheet = DinoGame.Properties.Resources.sprite;
             GenerateRoad();
         }
 
+        // MoveMap меняет X координату игровых объектов в их листах на -= speed
+        // Также произходит чистка листов объектов от объектов, которые находятся за окном WinForms.
         public static void MoveMap(int speed)
         {
-            for(int i = 0; i < roads.Count; i++)
+            for(int i = 0; i < Roads.Count; i++)
             {
-                roads[i].transform.position.X -= speed;
-                if (roads[i].transform.position.X + roads[i].transform.size.Width < 0)
+                Roads[i].Transform.Position.X -= speed;
+                if (Roads[i].Transform.Position.X + Roads[i].Transform.Size.Width < 0)
                 {
-                    roads.RemoveAt(i);
+                    Roads.RemoveAt(i);
                     GetNewRoad();
                 }
             }
-            for (int i = 0; i < cactuses.Count; i++)
+            for (int i = 0; i < Cactuses.Count; i++)
             {
-                cactuses[i].transform.position.X -= speed;
-                if (cactuses[i].transform.position.X + cactuses[i].transform.size.Width < 0)
+                Cactuses[i].Transform.Position.X -= speed;
+                if (Cactuses[i].Transform.Position.X + Cactuses[i].Transform.Size.Width < 0)
                 {
-                    cactuses.RemoveAt(i);
+                    Cactuses.RemoveAt(i);
                 }
             }
-            for (int i = 0; i < birds.Count; i++)
+            for (int i = 0; i < Birds.Count; i++)
             {
-                birds[i].transform.position.X -= speed;
-                if (birds[i].transform.position.X + birds[i].transform.size.Width < 0)
+                Birds[i].Transform.Position.X -= speed;
+                if (Birds[i].Transform.Position.X + Birds[i].Transform.Size.Width < 0)
                 {
-                    birds.RemoveAt(i);
+                    Birds.RemoveAt(i);
                 }
             }
         }
 
-        private static void GetNewRoad()
+        // DrawObjects отрисовывает все объекты из листов Roads, Birds и Cactuses.
+        public static void DrawObjets(Graphics g)
         {
-            Road road = new Road(new PointF(0 + 100 * 9, 200), new Size(100, 17));
-            roads.Add(road);
-            countDangerSpawn++;
-
-            if (countDangerSpawn >= dangerSpawn)
+            foreach (var road in Roads)
+                road.DrawSprite(g);
+            foreach (var cactus in Cactuses)
+                cactus.DrawSprite(g);
+            foreach (var bird in Birds)
+                bird.DrawSprite(g);
+        }
+        
+        // Генерирует препятствия, частота появления которых напрямую связана с скоростью движения динозавра
+        // (На самом деле не динозавра, а всех объектов кроме него)
+        public static void GenerateObstacles(int minimalDistance)
+        {
+            if (CountDangerSpawn >= DangerSpawn)
             {
-                Random r = new Random();
-                dangerSpawn = r.Next(5, 9);
-                countDangerSpawn = 0;
-                int obj = r.Next(0, 2);
+                var r = new Random();
+                DangerSpawn = r.Next(minimalDistance, minimalDistance+5);
+                CountDangerSpawn = 0;
+                var obj = r.Next(0, 2);
                 switch (obj)
                 {
                     case 0:
-                        Cactus cactus = new Cactus(new PointF(0 + 100 * 9, 130), new Size(40, 70));
-                        cactuses.Add(cactus);
+                        var cactus = new Cactus(new PointF(0 + 100 * 9, 155), new Size(30, 60));
+                        Cactuses.Add(cactus);
                         break;
                     case 1:
-                        Bird bird = new Bird(new PointF(0 + 100 * 9, 120), new Size(50, 50));
-                        birds.Add(bird);
+                        var bird = new Bird(new PointF(0 + 100 * 9, 120), new Size(50, 50));
+                        Birds.Add(bird);
                         break;
                 }
             }
         }
+        
+        private static void GetNewRoad()
+        {
+            Roads.Add(new Road(new PointF(100 * 9, 200), new Size(100, 17)));
+            CountDangerSpawn++;
+        }
 
+        // Заполняет массив дорог и увеличивает CounterDangerSpawn
+        // При достижении определенного значения CounterDangerSpawn генерируется случайное препятствие.
         private static void GenerateRoad()
         {
             for(int i = 0; i < 10; i++)
             {
                 Road road = new Road(new PointF(0 + 100 * i, 200), new Size(100, 17));
-                roads.Add(road);
-                countDangerSpawn++;
-            }
-        }
-
-        public static void DrawObjets(Graphics g)
-        {
-            for(int i = 0; i < roads.Count; i++)
-            {
-                roads[i].DrawSprite(g);
-            }
-            for (int i = 0; i < cactuses.Count; i++)
-            {
-                cactuses[i].DrawSprite(g);
-            }
-            for (int i = 0; i < birds.Count; i++)
-            {
-                birds[i].DrawSprite(g);
+                Roads.Add(road);
+                CountDangerSpawn++;
             }
         }
     }

@@ -5,21 +5,21 @@ namespace DinoGame.Classes
 {
     public class Player
     {
-        public Physics physics;
-        public int framesCount = 0;
-        public int animationCount = 0;
-        public int score = 0;
+        public Physics Physics;
+        public int FramesCount = 0;
+        public int AnimationCount = 0;
+        public int Score = 0;
 
         public Player(PointF position, Size size)
         {
-            physics = new Physics(position, size);
-            framesCount = 0;
-            score = 0;
+            Physics = new Physics(position, size);
+            FramesCount = 0;
+            Score = 0;
         }
 
         public void DrawSprite(Graphics g)
         {
-            if (physics.isCrouching)
+            if (Physics.IsCrouching)
             {
                 DrawNeededSprite(g, 1870, 40, 109, 51, 118, 1.35f);
             }
@@ -31,18 +31,18 @@ namespace DinoGame.Classes
 
         private void DrawNeededSprite(Graphics g, int srcX, int srcY, int width, int height, int delta, float multiplier)
         {
-            framesCount++;
-            if (framesCount <= 10)
-                animationCount = 0;
-            else if (framesCount > 10 && framesCount <= 20)
-                animationCount = 1;
-            else if (framesCount > 20)
-                framesCount = 0;
+            FramesCount++;
+            if (FramesCount <= 10)
+                AnimationCount = 0;
+            else if (FramesCount > 10 && FramesCount <= 20)
+                AnimationCount = 1;
+            else if (FramesCount > 20)
+                FramesCount = 0;
 
-            g.DrawImage(GameController.spritesheet, new Rectangle(
-                new Point((int)physics.transform.position.X, (int)physics.transform.position.Y),
-                new Size((int)(physics.transform.size.Width * multiplier), physics.transform.size.Height)),
-                srcX + delta * animationCount, srcY, width, height, GraphicsUnit.Pixel);
+            g.DrawImage(GameController.Spritesheet, new Rectangle(
+                new Point((int)Physics.Transform.Position.X, (int)Physics.Transform.Position.Y),
+                new Size((int)(Physics.Transform.Size.Width * multiplier), Physics.Transform.Size.Height)),
+                srcX + delta * AnimationCount, srcY, width, height, GraphicsUnit.Pixel);
         }
     }
 
@@ -50,16 +50,16 @@ namespace DinoGame.Classes
     {
         public static void Jump(this Player player)
         {
-            if (player.physics.isCrouching) return;
-            player.physics.isCrouching = false;
-            player.physics.AddForce();
+            if (player.Physics.IsCrouching) return;
+            player.Physics.IsCrouching = false;
+            player.Physics.AddForce();
         }
         
         public static void Crouch(this Player player)
         {
-            player.physics.isCrouching = false;
-            player.physics.transform.size.Height = 50;
-            player.physics.transform.position.Y = 150.2f;
+            player.Physics.IsCrouching = false;
+            player.Physics.Transform.Size.Height = 50;
+            player.Physics.Transform.Position.Y = 150.2f;
         }
     }
 }

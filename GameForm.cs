@@ -9,11 +9,11 @@ namespace DinoGame
 {
     public partial class GameForm : Form
     {
-        Player player;
-        Timer mainTimer;
-        private int currentSpeed = 1;
-        private int increasedSpeed = 0;
-        private int speedConst = 3;
+        Player _player;
+        Timer _mainTimer;
+        public static int CurrentSpeed = 1;
+        private int _increasedSpeed = 0;
+        private int _speedConst = 3;
         public GameForm()
         {
             InitializeComponent();
@@ -28,28 +28,32 @@ namespace DinoGame
             this.Paint += new PaintEventHandler(DrawGame);
             this.KeyUp += new KeyEventHandler(OnKeyboardUp);
             this.KeyDown += new KeyEventHandler(OnKeyboardDown);
-            mainTimer = new Timer {Interval = 1};
-            mainTimer.Tick += new EventHandler(Update);
+            _mainTimer = new Timer {Interval = 1};
+            _mainTimer.Tick += new EventHandler(Update);
 
             Init();
         }
 
         private void Update(object sender, EventArgs e)
         {
-            player.score++;
-            this.label1.Text = (player.score).ToString();
-            this.label2.Text = "dino speed: " + increasedSpeed;
-            increasedSpeed = 1 + (player.score / 500 );
-            currentSpeed = speedConst + increasedSpeed;
-            if (player.physics.Collide())
+            label1.Text = (_player.Score/10).ToString();
+            label2.Text = "dino speed: " + _increasedSpeed;
+            
+            _player.Score++;
+            
+            _increasedSpeed = 1 + (_player.Score / 500 );
+            CurrentSpeed = _speedConst + _increasedSpeed;
+            
+            GameController.GenerateObstacles(CurrentSpeed);
+            if (_player.Physics.Collide())
             {
                 Thread.Sleep(1000);
                 Init();
             }
 
             
-            player.physics.ApplyPhysics();
-            GameController.MoveMap(currentSpeed);
+            _player.Physics.ApplyPhysics();
+            GameController.MoveMap(CurrentSpeed);
             Invalidate();
         }
         
@@ -58,12 +62,12 @@ namespace DinoGame
             switch (e.KeyCode)
             {
                 case Keys.S:
-                    if (!player.physics.isJumping)
+                    if (!_player.Physics.IsJumping)
                     {
-                        player.physics.isCrouching = true;
-                        player.physics.isJumping = false;
-                        player.physics.transform.size.Height = 25;
-                        player.physics.transform.position.Y = 174;
+                        _player.Physics.IsCrouching = true;
+                        _player.Physics.IsJumping = false;
+                        _player.Physics.Transform.Size.Height = 25;
+                        _player.Physics.Transform.Position.Y = 174;
                     }
                     break;
             }
@@ -74,15 +78,15 @@ namespace DinoGame
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    player.Jump();
+                    _player.Jump();
                     break;
                 
                 case Keys.Space:
-                    player.Jump();
+                    _player.Jump();
                     break;
 
                 case Keys.S:
-                    player.Crouch();
+                    _player.Crouch();
                     break;
             }
         }
@@ -90,15 +94,15 @@ namespace DinoGame
         private void Init()
         {
             GameController.Init();
-            player = new Player(new PointF(50, 150), new Size(50, 50));
-            mainTimer.Start();
+            _player = new Player(new PointF(50, 150), new Size(50, 50));
+            _mainTimer.Start();
             Invalidate();
         }
 
         private void DrawGame(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            player.DrawSprite(g);
+            _player.DrawSprite(g);
             GameController.DrawObjets(g);
         }
 
