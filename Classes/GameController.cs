@@ -20,9 +20,9 @@ namespace DinoGame.Classes
         public static int DangerSpawn = 5;
         public static int CountDangerSpawn = 0;
 
-        // Init инициализирует roads, birds, cactuses и привязывает sprite.png к переменной spritesheet
+        // Initialize инициализирует roads, birds, cactuses и привязывает sprite.png к переменной spritesheet
         // Отрисовка и генерация дороги в игре через GenegateRoad.
-        public static void Init()
+        public static void Initialize()
         {
             Roads = new List<Road>();
             Birds = new List<Bird>();
@@ -63,7 +63,7 @@ namespace DinoGame.Classes
         }
 
         // DrawObjects отрисовывает все объекты из листов Roads, Birds и Cactuses.
-        public static void DrawObjets(Graphics g)
+        public static void DrawObjeсts(Graphics g)
         {
             foreach (var road in Roads)
                 road.DrawSprite(g);
@@ -86,7 +86,7 @@ namespace DinoGame.Classes
                 switch (obj)
                 {
                     case 0:
-                        var cactus = new Cactus(new PointF(0 + 100 * 9, 155), new Size(30, 60));
+                        var cactus = new Cactus(new PointF(0 + 100 * 9, 150), new Size(30, 60));
                         Cactuses.Add(cactus);
                         break;
                     case 1:
@@ -99,8 +99,8 @@ namespace DinoGame.Classes
         
         private static void GetNewRoad()
         {
-            Roads.Add(new Road(new PointF(100 * 9, 200), new Size(100, 17)));
-            CountDangerSpawn++;
+            Roads.Add(new Road(new PointF(200 * 9, 200), new Size(200, 17)));
+            CountDangerSpawn+=2;
         }
 
         // Заполняет массив дорог и увеличивает CounterDangerSpawn
@@ -109,9 +109,9 @@ namespace DinoGame.Classes
         {
             for(int i = 0; i < 10; i++)
             {
-                Road road = new Road(new PointF(0 + 100 * i, 200), new Size(100, 17));
+                Road road = new Road(new PointF(0 + 200 * i, 200), new Size(200, 17));
                 Roads.Add(road);
-                CountDangerSpawn++;
+                CountDangerSpawn+=2;
             }
         }
     }

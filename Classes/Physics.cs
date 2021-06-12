@@ -4,26 +4,28 @@ using Dino.Classes;
 
 namespace DinoGame.Classes
 {
+    // Physics отвечает за взаимодействие внутриигровых объектов друг с другом
+    // (прыжок, коллизия объектов и тд)
     public class Physics
     {
         public Transform Transform;
-        float _gravity;
-        float _a;
-
+        private float _force;
+        private float _gravity;
+        
         public bool IsJumping;
         public bool IsCrouching;
 
-        public Physics(PointF position, Size size)
+        // Конструктор данного класса, задающий положение и размер экземпляру объекта
+        // Также принимает и задает величину гравитации
+        public Physics(PointF position, Size size, float gravity)
         {
             Transform = new Transform(position, size);
-            _gravity = 0;
-            _a = 0.4f;
+            _gravity = gravity;
             IsJumping = false;
             IsCrouching = false;
         }
-
         
-
+        // Проверка всех кактусов и птиц на коллизию
         public bool Collide()
         {
             foreach (var cactus in GameController.Cactuses)
@@ -55,28 +57,29 @@ namespace DinoGame.Classes
             return false;
         }
         
-        public void AddForce()
+        // Присвоение _force отрицательной величины, вследствии чего 
+        // Происходит прыжок
+        public void Jump()
         {
             if (!IsJumping)
             {
                 IsJumping = true;
-                _gravity = -10;
+                _force = -12;
             }
         }
-        
+
+        // ApplyPhysics изменяет положение объекта на экране
+        // Если он в прыжке - то на него действует гравитация
+        // Иначе статус "в прыжке" становится ложным.
         public void ApplyPhysics()
         {
-            CalculatePhysics();
-        }
-        
-        private void CalculatePhysics()
-        {
-            if(Transform.Position.Y<150 || IsJumping)
+            if(IsJumping)
             {
-                Transform.Position.Y += _gravity;
-                _gravity += _a;
+                Transform.Position.Y += _force;
+                _force += _gravity;
             }
-            if (Transform.Position.Y > 150)
+            if (Transform.Position.Y >= 150)
                 IsJumping = false;
-        }    }
+        }    
+    }
 }

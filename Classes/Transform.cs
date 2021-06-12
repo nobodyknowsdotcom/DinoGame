@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Dino.Classes
 {
+    /// <summary>
+    /// Transform создан для удобной работы с размером и положением внутриигровых объектов
+    /// </summary>
     public class Transform
     {
         public PointF Position;
