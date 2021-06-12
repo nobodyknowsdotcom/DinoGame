@@ -37,12 +37,17 @@ namespace DinoGame
         private void Update(object sender, EventArgs e)
         {
             player.score++;
-            this.label1.Text = "meters ahead: " + player.score/10;
+            this.label1.Text = (player.score).ToString();
             this.label2.Text = "dino speed: " + increasedSpeed;
             increasedSpeed = 1 + (player.score / 500 );
             currentSpeed = speedConst + increasedSpeed;
             if (player.physics.Collide())
+            {
+                Thread.Sleep(1000);
                 Init();
+            }
+
+            
             player.physics.ApplyPhysics();
             GameController.MoveMap(currentSpeed);
             Invalidate();
