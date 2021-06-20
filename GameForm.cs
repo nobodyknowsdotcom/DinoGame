@@ -47,10 +47,10 @@ namespace DinoGame
         {
             Width = 700;
             Height = 300;
-            Icon = Icon.ExtractAssociatedIcon("C:\\Users\\urmomlover\\RiderProjects\\DinoGame\\Sprites\\Icon.ico");
+            Icon = Icon.ExtractAssociatedIcon("..\\..\\Sprites\\Icon.ico");
             label1.BackColor = System.Drawing.Color.Transparent;
             label2.BackColor = System.Drawing.Color.Transparent;
-            Text = "Dino Runner";
+            Text = "DinoRunner";
             DoubleBuffered = true;
             Paint += new PaintEventHandler(DrawGame);
             KeyUp += new KeyEventHandler(OnKeyboardUp);
